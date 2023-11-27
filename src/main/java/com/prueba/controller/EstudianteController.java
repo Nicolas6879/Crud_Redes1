@@ -19,11 +19,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/estudiante")
 public class EstudianteController {
-    /*@GetMapping("")
-    public String show(Model model){
-        model.addAttribute("estudiante",estudianteService.findAll());
-        return "estudiantes/show";
-    }*/
     @GetMapping("/mostrar")
     public ResponseEntity<List<estudiante>> findAll() {
         return new ResponseEntity<>(this.estudianteService.findAll(), HttpStatus.OK);
@@ -48,22 +43,11 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
-    @PostMapping("/save")
+    @PostMapping("/crear")
     public String save(estudiante estudiante){
         LOGGER.info("Este es el objeto estudiante {}",estudiante);
         estudianteService.save(estudiante);
         return "redirect:/estudiante";
-    }
-    @GetMapping("/edit/{codigo}")
-    public String edit(@PathVariable Integer codigo, Model model){
-        estudiante estudiante= new estudiante();
-        Optional<estudiante> optionalEstudiante = estudianteService.get(codigo);
-        estudiante=optionalEstudiante.get();
-
-        LOGGER.info("Estudiante encontrado: {}",estudiante);
-        model.addAttribute("estudiante", estudiante);
-
-        return "editarEstudiante";
     }
     @PostMapping("/update/{codigo}")
     public String update(@PathVariable Integer codigo,estudiante estudiante){
@@ -94,6 +78,12 @@ public class EstudianteController {
         } else {
             return "Estudiante no encontrado";
         }
+    }
+
+    @GetMapping("/delete/{codigo}")
+    public String delete (@PathVariable Integer codigo){
+        estudianteService.delete(codigo);
+        return "Eliminado exitosamente";
     }
 
 

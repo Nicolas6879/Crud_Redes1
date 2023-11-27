@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EstudianteService {
-    public estudiante save(estudiante estudiante);
+    public estudiante crear(estudiante estudiante);
     public Optional<estudiante> get(Integer codigo);
     public void update(estudiante estudiante);
     public void delete (Integer codigo);
