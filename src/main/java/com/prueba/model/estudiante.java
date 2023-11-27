@@ -1,6 +1,13 @@
 package com.prueba.model;
 
+import jakarta.persistence.*;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class estudiante {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Integer codigo;
     private String nombre;
     private String apellido;
